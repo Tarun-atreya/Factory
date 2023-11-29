@@ -1,0 +1,30 @@
+Worker: Vanessa
+CPH: 44
+Total Cogs Produced: 659
+Wasted Productivity: 89
+Total/Waste : 7.4044943
+
+Worker: Hyrum
+CPH: 22
+Total Cogs Produced: 343
+Wasted Productivity: 31
+Total/Waste : 11.064516
+
+Worker: Justice
+CPH: 34
+Total Cogs Produced: 530
+Wasted Productivity: 48
+Total/Waste : 11.041667
+
+Worker: Raine
+CPH: 28
+Total Cogs Produced: 404
+Wasted Productivity: 72
+Total/Waste : 5.611111
+
+Worker: Berlynn
+CPH: 26
+Total Cogs Produced: 387
+Wasted Productivity: 55
+Total/Waste : 7.0363636
+
