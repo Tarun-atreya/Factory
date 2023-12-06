@@ -4,8 +4,6 @@ Luciana
 Margaret
 Renee
 Fatima
-Beau
-Jaylynn
 Enrique
 Natasha
 Allison
@@ -29,7 +27,8 @@ Ashley
 Shayla
 Kimora
 Ray
-Maleah
+Kendrick
+Aiden
 Thomas
 Miracle
 Tyrese
@@ -78,7 +77,6 @@ Justice
 Ashton
 Barbara
 Savanna
-Ximena
 Nathalie
 Krista
 Kaleigh
@@ -98,3 +96,4 @@ Makhi
 Haylee
 Keira
 Jonathon
+Rahul

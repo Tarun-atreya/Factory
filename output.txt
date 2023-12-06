@@ -1,30 +1,72 @@
-Worker: Vanessa
-CPH: 44
-Total Cogs Produced: 659
+Hour: 225
+Worker: Nathaly
+CPH: 15
+Total Cogs Produced: 195
+Wasted Productivity: 84
+Total/Waste : 2.3214285
+Total Waste: 9
+
+Hour: 225
+Worker: Destiney
+CPH: 45
+Total Cogs Produced: 495
+Wasted Productivity: 399
+Total/Waste : 1.2406015
+Total Waste: 53
+
+Hour: 225
+Worker: Vivian
+CPH: 16
+Total Cogs Produced: 272
 Wasted Productivity: 89
-Total/Waste : 7.4044943
+Total/Waste : 3.0561798
+Total Waste: 63
 
-Worker: Hyrum
-CPH: 22
-Total Cogs Produced: 343
-Wasted Productivity: 31
-Total/Waste : 11.064516
+Hour: 225
+Worker: Barbara
+CPH: 52
+Total Cogs Produced: 676
+Wasted Productivity: 255
+Total/Waste : 2.6509805
+Total Waste: 91
 
-Worker: Justice
-CPH: 34
-Total Cogs Produced: 530
-Wasted Productivity: 48
-Total/Waste : 11.041667
+Hour: 225
+Worker: Kellen
+CPH: 44
+Total Cogs Produced: 528
+Wasted Productivity: 373
+Total/Waste : 1.4155496
+Total Waste: 133
 
-Worker: Raine
-CPH: 28
-Total Cogs Produced: 404
-Wasted Productivity: 72
-Total/Waste : 5.611111
+Hour: 225
+Worker: Erik
+CPH: 43
+Total Cogs Produced: 430
+Wasted Productivity: 406
+Total/Waste : 1.0591133
+Total Waste: 178
 
-Worker: Berlynn
-CPH: 26
-Total Cogs Produced: 387
-Wasted Productivity: 55
-Total/Waste : 7.0363636
+Hour: 225
+Worker: Adyson
+CPH: 49
+Total Cogs Produced: 539
+Wasted Productivity: 367
+Total/Waste : 1.4686649
+Total Waste: 219
+
+Hour: 225
+Worker: Natasha
+CPH: 21
+Total Cogs Produced: 294
+Wasted Productivity: 93
+Total/Waste : 3.1612904
+Total Waste: 229
+
+Hour: 225
+Worker: Raegan
+CPH: 52
+Total Cogs Produced: 624
+Wasted Productivity: 284
+Total/Waste : 2.1971831
+Total Waste: 261
 

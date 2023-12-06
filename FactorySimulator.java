@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Collections;
 
 public class FactorySimulator {
     private ArrayList<Worker> workers;
@@ -12,11 +13,12 @@ public class FactorySimulator {
     private ArrayList<Integer> cogs;
     private PriorityQueue<Worker> available;
     private static ArrayList<String> workerNames;
+    private static int runcounter;
 
     public FactorySimulator(ArrayList<Worker> workers, ArrayList<Integer> c) {
-        // namepool
         this.workers = workers;
         this.cogs = c;
+        runcounter = 0;
         reset();
         available = new PriorityQueue<Worker>();
         for (Worker w : workers) {
@@ -26,80 +28,85 @@ public class FactorySimulator {
 
     public void reset() {
         orders = new LinkedList<Integer>();
-        for (Integer i : cogs) {
+        for (Integer i : cogs)
             orders.add(i);
-        }
     }
 
     public void run() {
         int hours = 0;
 
         while (!(orders.isEmpty() && done())) {
-            try {
-                for (Worker w : available) {
-                    w.assign(orders.poll());
-                }
-            } catch (Exception e) {
-            }
-            for (Worker w : workers) {
-                w.work1hr();
-            }
+            assign();
+            work();
             hours++;
-            for (Worker w : workers) {
-                if (!w.isBusy()) {
-                    available.add(w);
-                }
-            }
+            ready();
             printWorkerStats();
         }
+    }
 
+    public void ready() {
+        for (Worker w : workers) {
+            if (!w.isBusy())
+                available.add(w);
+        }
+    }
+
+    public void assign() {
+        PriorityQueue<Integer> temp = new PriorityQueue<Integer>(Collections.reverseOrder());
+        System.out.println(orders.size());
+        temp = Algo();
+        try {
+            while (available.size() > 0) {
+                Worker w = available.poll();
+                w.assign(temp.poll());
+                System.out.println(w.getName() + " " + w.getInProcess() + " " + w.getcph());
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private PriorityQueue<Integer> Algo() {
+        PriorityQueue<Integer> temp = new PriorityQueue<Integer>(Collections.reverseOrder());
+        if (orders.size() > available.size()) {
+            for (int i = 0; i < available.size(); i++) {
+                temp.add(orders.poll());
+            }
+        } else {
+            for (int i = 0; i < orders.size(); i++) {
+                temp.add(orders.poll());
+            }
+        }
+        return temp;
+    }
+
+    public void work() {
+        for (Worker w : workers) {
+            w.work1hr();
+            runcounter++;
+        }
     }
 
     public void printWorkerStats() {
         File file = new File("output" + ".txt");
+        int totalwaste = 0;
         try {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file);
             for (Worker worker : workers) {
+                totalwaste += worker.getWaste();
+                fileWriter.write("Hour: " + runcounter + "\n");
                 fileWriter.write("Worker: " + worker.getName() + "\n");
                 fileWriter.write("CPH: " + worker.getcph() + "\n");
                 fileWriter.write("Total Cogs Produced: " + worker.getTotal() + "\n");
                 fileWriter.write("Wasted Productivity: " + worker.getWaste() + "\n");
                 fileWriter.write("Total/Waste : " + ((float) worker.getTotal() / (float) worker.getWaste()) + "\n");
+                fileWriter.write("Total Waste: " + totalwaste / workers.size() + "\n");
                 fileWriter.write("\n");
                 fileWriter.flush();
             }
         } catch (Exception e) {
             System.out.println("Error");
         }
-    }
-
-    public static ArrayList<Worker> getWorkers() {
-        ArrayList<Worker> workers = new ArrayList<Worker>();
-        int temp = (int) (Math.random() * 7) + 3;
-        for (int i = 0; i < temp; i++) {
-            int cph = (int) (Math.random() * 41) + 15;
-            Worker some = new Worker(getName(), cph);
-            workers.add(some);
-        }
-        return workers;
-    }
-
-    public static ArrayList<Integer> getOrders() {
-        ArrayList<Integer> orders = new ArrayList<Integer>();
-        for (int i = 0; i < 97; i++) {
-            orders.add((int) (Math.random() * 81) + 20);
-        }
-        for (int i = 0; i < 3; i++) {
-            orders.add((int) (Math.random() * 11) + 100);
-        }
-        return orders;
-    }
-
-    public static String getName() {
-        String temp = workerNames.get((int) (Math.random() * workerNames.size()));
-        workerNames.remove(temp);
-        return temp;
     }
 
     public boolean done() {
@@ -109,18 +116,6 @@ public class FactorySimulator {
             }
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        workerNames = new ArrayList<String>();
-        workerNames = loadNames();
-        ArrayList<Worker> workers = new ArrayList<>();
-        ArrayList<Integer> cogs = new ArrayList<Integer>();
-        cogs = getOrders();
-        workers = getWorkers();
-        FactorySimulator fs = new FactorySimulator(workers, cogs);
-        fs.run();
-
     }
 
     public static ArrayList<String> loadNames() {
