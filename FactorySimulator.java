@@ -51,34 +51,64 @@ public class FactorySimulator {
         }
     }
 
-    public void assign() {
-        PriorityQueue<Integer> temp = new PriorityQueue<Integer>(Collections.reverseOrder());
-        System.out.println(orders.size());
-        temp = Algo();
-        try {
-            while (available.size() > 0) {
-                Worker w = available.poll();
-                w.assign(temp.poll());
-                System.out.println(w.getName() + " " + w.getInProcess() + " " + w.getcph());
-            }
-        } catch (Exception e) {
-        }
-    }
+    // public void assign() {
+    //     PriorityQueue<Integer> temp = new PriorityQueue<Integer>(Collections.reverseOrder());
+    //     System.out.println(orders.size());
+    //     temp = Algo();
+    //     try {
+    //         while (available.size() > 0) {
+    //             Worker w = available.poll();
+    //             w.assign(temp.poll());
+    //             System.out.println(w.getName() + " " + w.getInProcess() + " " + w.getcph());
+    //         }
+    //     } catch (Exception e) {
+    //     }
+    // }
 
-    private PriorityQueue<Integer> Algo() {
-        PriorityQueue<Integer> temp = new PriorityQueue<Integer>(Collections.reverseOrder());
+    // private PriorityQueue<Integer> Algo() {
+    //     PriorityQueue<Integer> temp = new PriorityQueue<Integer>(Collections.reverseOrder());
+        // if (orders.size() > available.size()) {
+        //     for (int i = 0; i < available.size(); i++) {
+        //         temp.add(orders.poll());
+        //     }
+        // } else {
+        //     for (int i = 0; i < orders.size(); i++) {
+        //         temp.add(orders.poll());
+        //     }
+        // }
+    //     return temp;
+    // }
+
+    public void assign() {
+        PriorityQueue<Integer> orders = new PriorityQueue<Integer>(Collections.reverseOrder());
         if (orders.size() > available.size()) {
             for (int i = 0; i < available.size(); i++) {
-                temp.add(orders.poll());
+                orders.add(orders.poll());
             }
         } else {
             for (int i = 0; i < orders.size(); i++) {
-                temp.add(orders.poll());
+                orders.add(orders.poll());
             }
         }
-        return temp;
-    }
+        Worker[] temp = new Worker[available.size()];
+        temp = available.toArray(temp); 
+        int pos = 0; 
+        int leftover = 0;
+        for (int i = 0; i < available.size(); i++)
+        {
+            if(temp[i].getcph() < orders.peek())
+            {
+                if(orders.peek() % temp[i].getcph() < leftover)
+                {
+                    leftover = orders.peek() % temp[i].getcph();
+                    pos = i;
+                }
+            }
+        }
+        temp[pos].assign(orders.poll());
 
+        
+    }
     public void work() {
         for (Worker w : workers) {
             w.work1hr();
