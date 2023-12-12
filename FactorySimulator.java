@@ -92,16 +92,12 @@ public class FactorySimulator {
                 newOrders.add(orders.poll());
             }
         }
-        System.out.println(orders);
         Worker[] temp = new Worker[available.size()];
         temp = available.toArray(temp);
         int pos = 0;
         int leftover = 0;
         while (!newOrders.isEmpty()) {
             for (int i = 0; i < available.size(); i++) {
-                System.out.println("worker speed: " + temp[i].getcph());
-                System.out.println("next order " + newOrders.peek());
-                System.out.println("pos: " + pos);
                 if (temp[i].getcph() < newOrders.peek()) {
                     if (newOrders.peek() % temp[i].getcph() < leftover) {
                         leftover = newOrders.peek() % temp[i].getcph();
