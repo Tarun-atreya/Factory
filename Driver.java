@@ -1,4 +1,6 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Driver {
@@ -10,10 +12,26 @@ public class Driver {
         workerNames = FactorySimulator.loadNames();
         ArrayList<Worker> workers = new ArrayList<>();
         ArrayList<Integer> cogs = new ArrayList<Integer>();
-        cogs = getOrders();
-        workers = getWorkers();
-        FactorySimulator fs = new FactorySimulator(workers, cogs);
-        fs.run();
+        try{
+            file.createNewFile();
+            //write to file
+            for(int i = 1; i <= 10000; i++)
+            {
+                FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+                fw.write("Simulation " + i + "\n");
+                fw.flush();
+                fw.close();
+                workerNames = FactorySimulator.loadNames();
+                cogs = getOrders();
+                workers = getWorkers();
+                FactorySimulator fs = new FactorySimulator(workers, cogs);
+                fs.run();
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
     }
 
     public static ArrayList<Worker> getWorkers() {

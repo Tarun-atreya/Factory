@@ -40,8 +40,8 @@ public class FactorySimulator {
             work();
             hours++;
             ready();
-            printWorkerStats();
         }
+        printWorkerStats();
     }
 
     public void ready() {
@@ -124,8 +124,7 @@ public class FactorySimulator {
         File file = new File("output" + ".txt");
         int totalwaste = 0;
         try {
-            file.createNewFile();
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(file, true);
             for (Worker worker : workers) {
                 totalwaste += worker.getWaste();
                 fileWriter.write("Hour: " + runcounter + "\n");
